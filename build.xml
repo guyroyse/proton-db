@@ -1,0 +1,17 @@
+<project name="ProtonDb" basedir="." default="all">
+	<target name="all" depends="build,test" />
+	<target name="build">
+		<concat destfile="${basedir}/dist/proton.js" fixlastline="yes">
+			<filelist dir="${basedir}/src" files="json.js proton.core.js proton.array.js proton.comparators.js proton.sorters.js proton.match.js proton.db.js" />
+		</concat>
+	</target>
+	<target name="test">
+		<exec executable="jspec.bat" osfamily="windows" failonerror="true">
+			<arg line="run --rhino" />
+		</exec>
+		<exec executable="jspec" osfamily="unix" failonerror="true">
+			<arg line="run --rhino" />
+		</exec>
+	</target>
+</project>
+
