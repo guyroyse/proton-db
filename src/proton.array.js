@@ -81,15 +81,23 @@ Array.prototype.order = function(sort) {
 		return keys
 	}
 	
-	var sortedArray = this
 	var keys = extractKeysFromObject(sort)
-	keys.reverse().forEach(function(key) {
-		print('Key: ' + key)
-		print('Before: ' + JSON.serialize(sortedArray))
-		sortedArray = sortedArray.sort(function(a, b) {
-			return sort[key](a[key], b[key])
+
+	var sortFunction = function(a, b) {
+		var compareComplete = false
+		var compareResult = 0
+		keys.forEach(function(key) {
+			if (!compareComplete) {
+				var result = sort[key](a[key], b[key])
+				if (result != 0) {
+					compareComplete = true
+					compareResult = result
+				}
+			}
 		})
-		print('After: ' + JSON.serialize(sortedArray))
-	})
+		return compareResult
+	}
+
+	sortedArray = this.sort(sortFunction)
 	return sortedArray
 }
