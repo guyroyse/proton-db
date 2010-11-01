@@ -6,7 +6,7 @@ function setupDatabase() {
 	db().clear()
 	db().save({foo:'foo', bar:'bar'})
 	db().save({foo:'bar', bar:'bar'})
-	db().save({foo:'baz'})	
+	db().save({foo:'baz'})
 }
 
 function testMatcher(value) {
