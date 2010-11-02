@@ -1,40 +1,39 @@
 Database Operations
 -------------------
 
-Save objects:			proton.db('things').save(<object>)		
-				proton.db('things').save(<object>,<object>,<object>...)
+Save objects:				proton.db('things').save(<object>)		
+							proton.db('things').save(<object>,<object>,<object>...)
 Remove matching objects:	proton.db('things').remove(<query>)
-				proton.db('things').remove(<query>,<query>,<query>...)
-Remove all objects:		proton.db('things').clear()
+							proton.db('things').remove(<query>,<query>,<query>...)
+Remove all objects:			proton.db('things').clear()
 Update matching objects:	proton.db('things').update(<update>,<query>)
-				proton.db('things').update(<update>,<query>,<query>,<query>...)
+							proton.db('things').update(<update>,<query>,<query>,<query>...)
 Query matching objects:		<array> proton.db('things').find(<query>)
-				<array> proton.db('things').find(<query>,<query>,<query>...)
-Get all objects:		<array> proton.db('things').all()
+							<array> proton.db('things').find(<query>,<query>,<query>...)
+Get all objects:			<array> proton.db('things').all()
 Get distinct objects:		<array> proton.db('things').distinct()
-Match objects:			<bool> proton.match(<object>, <query>)
+Match objects:				<bool> proton.match(<object>, <query>)
 
-A sample <object>:		{name:'Alex Trabeck', occupation:'Game Show Host', favorites:{bird:'robin', color:'blue'}}
+A sample <object>:			{name:'Alex Trabeck', occupation:'Game Show Host', favorites:{bird:'robin', color:'blue'}}
 A sample <query>:
-  (simple)			{occupation: 'Game Show Host'}
-  (stock function)		{salary: proton.greaterThan(100000)}
-  (custom function)		{occupation: function(value) { return value.charAt(3) == 'e' } } 
-  (complex)			{occupation: 'Game Show Host', salary: proton.greaterThan(100000)}
-  (regex)			{occupation: /Game/)
-  (deep) 			(name: 'Alex Trabeck', favorites: {color: 'blue'} }
-A sample <update>:i
-  (add)				{salary: 250000}
-  (remove)			{occupation: undefined}
-  (change)			{occupation: 'Spokesman'}
-A sample <sort>:		{occupation: proton.ascending, salary: proton.descending} 
+  (simple)					{occupation: 'Game Show Host'}
+  (stock function)			{salary: proton.greaterThan(100000)}
+  (custom function)			{occupation: function(value) { return value.charAt(3) == 'e' } } 
+  (complex)					{occupation: 'Game Show Host', salary: proton.greaterThan(100000)}
+  (regex)					{occupation: /Game/)
+  (deep) 					(name: 'Alex Trabeck', favorites: {color: 'blue'} }
+A sample <update>:
+  (add)						{salary: 250000}
+  (remove)					{occupation: undefined}
+  (change)					{occupation: 'Spokesman'}
+A sample <sort>:			{occupation: proton.ascending, salary: proton.descending} 
 
-Some ideas:
 Array Operations
 ----------------
 
 Constructor:
-  (empty)			new Array()
-  (copy)			new Array('foo','bar','baz')
+  (empty)				new Array()
+  (copy)				new Array('foo','bar','baz')
 Filter array:			<array> things.sift(<query>)
 First set of items:		<array> things.top(5)
 Last set of items:		<array> things.bottom(3)
@@ -42,24 +41,12 @@ Paged items:			<array> things.page(2,20)
 First object			<object> things.first()
 Last object:			<object> things.last()
 Distinct items:			<array> Array.distinct()
-Sort array:			<array> Array.order(<sort>)
+Sort array:				<array> Array.order(<sort>)
 
 Complex queries:		<array> proton.db('things').all().distinct().sift(<query>).order(<sort>).top()
 
-=============================================================================================================
-
-Future Features
+Meta Operations
 ---------------
-
-Meta Stuff:			
 List of sets:			<array> proton.sets()
-  returns a list of all set names
-  
-Dump:				<array> proton.dump()
-  dumps contents of entire database into an array of arrays
-
-
-Other Ideas
------------
-Array Matches -- matches array values
-Random sorting
+Dump all sets:			<list> proton.dump()
+Clear all sets:			proton.wipe()

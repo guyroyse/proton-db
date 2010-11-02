@@ -39,6 +39,20 @@ describe 'proton'
 			proton.sets().should.be_empty
 		end
 	end
+	
+	describe '.dump()'
+		it 'should return entire database when dumped'
+			var dump = proton.dump()
+			dump['data'].length.should.be 3
+			dump['data'][0].foo.should.be 'foo'
+			dump['data'][1].foo.should.be 'bar'
+			dump['data'][2].foo.should.be 'baz'
+			dump['data2'].length.should.be 2
+			dump['data2'][0].baz.should.be 'baz'
+			dump['data2'][1].baz.should.be 'qux'
+			
+		end
+	end
 
 	describe '.db()'
 		it 'should return a database when asked'

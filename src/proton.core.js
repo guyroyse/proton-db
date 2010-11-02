@@ -10,3 +10,10 @@ proton.wipe = function() {
 		proton.db(item).clear();
 	})	
 }
+proton.dump = function() {
+	var data = []
+	proton.sets().forEach(function(item) {
+		data[item] = proton.db(item).all()
+	})
+	return data
+}
