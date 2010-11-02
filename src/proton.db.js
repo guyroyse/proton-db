@@ -37,14 +37,14 @@ var ProtonDb = function(key) {
 	}
 
 	internal.removeMeta = function() {
-		var existingObjects = JSON.parse(window.localStorage[metaKey])
+		var existingObjects = internal.all(metaKey)
 		var allObjects = new Array()
 		for (var i = 0; i < existingObjects.length; i++) {
 			if (existingObjects[i] != key) {
 				allObjects.push(existingObjects[i])
 			}
 		}
-		window.localStorage[metaKey] = JSON.serialize(allObjects)
+		internal.persistObjects(allObjects, metaKey)
 	}
 
 	internal.find = function(theQueries) {
