@@ -5,13 +5,17 @@ describe 'proton'
 		before_each
 			setupDatabase()
 		end
-
+		
 		describe '.all()'
 			it 'should return all the objects of the set'
 				db().all().length.should.be 3
 			end
 			it 'should return all the objects as an Array'
 				db().all().should.be_an_instance_of Array
+			end
+			it 'should return different lists for different sets'
+				db().all().length.should.be 3
+				db2().all().length.should.be 2
 			end
 		end
 		

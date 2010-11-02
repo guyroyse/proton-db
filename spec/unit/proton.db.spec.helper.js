@@ -2,11 +2,17 @@ function db() {
 	return proton.db('data')
 }
 
+function db2() {
+	return proton.db('data2')
+}
+
 function setupDatabase() {
-	db().clear()
+	proton.wipe()
 	db().save({foo:'foo', bar:'bar'})
 	db().save({foo:'bar', bar:'bar'})
 	db().save({foo:'baz'})
+	db2().save({baz:'baz', qux:'qux'})
+	db2().save({baz:'qux'})
 }
 
 function testMatcher(value) {
