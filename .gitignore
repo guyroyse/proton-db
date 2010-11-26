@@ -1,4 +1,4 @@
 dist
-metrics
+metrics/output
 .externalToolBuilders
 .project
