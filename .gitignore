@@ -1,1 +1,4 @@
 dist
+metrics
+.externalToolBuilders
+.project

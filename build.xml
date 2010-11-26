@@ -13,5 +13,13 @@
 			<arg line="run --rhino" />
 		</exec>
 	</target>
+	<target name="metrics">
+		<exec executable="curl" osfamily="unix" failonerror="true" output="${basedir}/metrics/jsmeter.html">
+			<arg line=" http://jsmeter.info/jsmeter?mode=TABLE --silent -F File=@${basedir}/dist/proton.js" />
+		</exec>
+		<exec executable="curl" osfamily="unix" failonerror="true" output="${basedir}/metrics/jsmeter.json">
+			<arg line=" http://jsmeter.info/jsmeter?mode=JSON --silent -F File=@${basedir}/dist/proton.js > ${basedir}/metrics/jsmeter.json" />
+		</exec>
+	</target>
 </project>
 
