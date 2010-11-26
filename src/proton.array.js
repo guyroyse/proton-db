@@ -1,6 +1,6 @@
 Array.prototype.sift = function() {
 
-	var theQueries = null;
+	var theQueries = null, foundObjects = [];
 
 	if (arguments[0] instanceof Array) {
 		theQueries = arguments[0];
@@ -8,39 +8,38 @@ Array.prototype.sift = function() {
 		theQueries = proton.argumentsToArray(arguments);
 	}
 
-	if (!theQueries || theQueries.length == 0) {
+	if (!theQueries || theQueries.length === 0) {
 		return this;
 	} else {
-		var foundObjects = new Array();
 		this.forEach(function(theObject) {
 			if (proton.match(theObject, theQueries))
 				foundObjects.push(theObject);
 		});
 		return foundObjects;
 	}
-}
+};
 
 Array.prototype.first = function() {
 	return this.top()[0];
-}
+};
 
 Array.prototype.last = function() {
 	return this.bottom()[0];
-}
+};
 
 Array.prototype.top = function(amount) {
 	return this.slice(0, amount == null ? 1 : amount);
-}
+};
 
 Array.prototype.bottom = function(amount) {
 	return this.slice(amount == null ? -1 : -amount);
-}
+};
 
 Array.prototype.page = function(page, pageCount) {
 	start = (page - 1) * pageCount;
 	end = start + pageCount;
 	return this.slice(start, end);
-}
+};
 
 Array.prototype.distinct = function() {
 
@@ -67,7 +66,7 @@ Array.prototype.distinct = function() {
 	});
 	return uniques;
 
-}
+};
 
 Array.prototype.order = function(sort) {
 
@@ -97,4 +96,4 @@ Array.prototype.order = function(sort) {
 
 	sortedArray = this.sort(sortFunction);
 	return sortedArray;
-}
+};
