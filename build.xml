@@ -1,5 +1,5 @@
 <project name="ProtonDb" basedir="." default="all">
-	<target name="all" depends="build,test" />
+	<target name="all" depends="build,test,metrics" />
 	<target name="build">
 		<concat destfile="${basedir}/dist/proton.js" fixlastline="yes">
 			<filelist dir="${basedir}/src" files="json.js proton.core.js proton.array.js proton.comparators.js proton.sorters.js proton.match.js proton.db.js" />
@@ -14,13 +14,13 @@
 		</exec>
 	</target>
 	<target name="metrics">
-		<exec executable="curl" osfamily="unix" failonerror="true" output="${basedir}/metrics/output/jsmeter.html">
+		<exec executable="curl" osfamily="unix" output="${basedir}/metrics/output/jsmeter.html">
 			<arg line="http://jsmeter.info/jsmeter?mode=TABLE --silent -F File=@${basedir}/dist/proton.js" />
 		</exec>
-		<exec executable="curl" osfamily="unix" failonerror="true" output="${basedir}/metrics/output/jsmeter.json">
+		<exec executable="curl" osfamily="unix" output="${basedir}/metrics/output/jsmeter.json">
 			<arg line="http://jsmeter.info/jsmeter?mode=JSON --silent -F File=@${basedir}/dist/proton.js" />
 		</exec>
-		<exec executable="rhino" osfamily="unix" failonerror="true" output="${basedir}/metrics/output/jslint.txt">
+		<exec executable="rhino" osfamily="unix" output="${basedir}/metrics/output/jslint.txt">
 			<arg line="${basedir}/metrics/helper/jslint.js ${basedir}/dist/proton.js" />
 		</exec>
 	</target>
