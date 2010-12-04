@@ -107,7 +107,7 @@ proton.db = function(key) {
 		}
 	};
 
-	return {
+	var db = {
 		save : function() {
 			internal.save(proton.argumentsToArray(arguments));
 		},
@@ -130,5 +130,6 @@ proton.db = function(key) {
 			internal.update(proton.argumentsToArray(arguments));
 		}
 	};
-
+	
+	return db;
 }
