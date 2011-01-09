@@ -15,10 +15,10 @@
 	</target>
 	<target name="metrics">
 		<exec executable="curl" osfamily="unix" output="${basedir}/metrics/output/jsmeter.html">
-			<arg line="http://jsmeter.info/jsmeter?mode=TABLE --silent -F File=@${basedir}/dist/proton.js" />
+			<arg line="http://jsmeter.info/jsmeter?mode=TABLE --silent --connect-timeout 60 -F File=@${basedir}/dist/proton.js" />
 		</exec>
 		<exec executable="curl" osfamily="unix" output="${basedir}/metrics/output/jsmeter.json">
-			<arg line="http://jsmeter.info/jsmeter?mode=JSON --silent -F File=@${basedir}/dist/proton.js" />
+			<arg line="http://jsmeter.info/jsmeter?mode=JSON --silent --connect-timeout 60 -F File=@${basedir}/dist/proton.js" />
 		</exec>
 		<exec executable="rhino" osfamily="unix" output="${basedir}/metrics/output/jslint.txt">
 			<arg line="${basedir}/metrics/helper/jslint.js ${basedir}/dist/proton.js" />
