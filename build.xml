@@ -24,6 +24,5 @@
 			<arg line="${basedir}/metrics/helper/jslint.js ${basedir}/dist/proton.js" />
 		</exec>
 	</target>
-	
 </project>
 
