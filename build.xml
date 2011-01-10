@@ -1,5 +1,5 @@
 <project name="ProtonDb" basedir="." default="all">
-	<target name="all" depends="clean,build,test,metrics" />
+	<target name="all" depends="clean,build,minify,test,metrics" />
 	<target name="clean">
 		<delete dir="dist"/>
 		<delete dir="metrics/output"/>
@@ -22,6 +22,10 @@
 		<exec executable="rhino" osfamily="unix" output="${basedir}/metrics/output/jslint.txt">
 			<arg line="${basedir}/metrics/helper/jslint.js ${basedir}/dist/proton.js" />
 		</exec>
+	</target>
+	<target name="minify" depends="build">
+		<exec executable="${basedir}/minify/jsmin" osfamily="unix" input="${basedir}/dist/proton.js" output="${basedir}/dist/proton-min.js" />
+		<exec executable="${basedir}/minify/jsmin.exe" osfamily="windows" input="${basedir}/dist/proton.js" output="${basedir}/dist/proton-min.js" />
 	</target>
 </project>
 
