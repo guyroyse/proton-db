@@ -15,7 +15,7 @@ proton.wipe = function() {
 };
 
 proton.dump = function() {
-	var data = [];
+	var data = {};
 	proton.sets().forEach(function(item) {
 		data[item] = proton.db(item).all();
 	});
