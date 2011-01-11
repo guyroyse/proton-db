@@ -45,7 +45,8 @@ proton.match = function() {
 		if (theQueries.length == 1 && theQueries[0] instanceof Array) {
 			theQueries = theQueries[0];
 		}
-	};
+	}
+	;
 
 	return internal.matchesQueries(theQueries, theObject);
 }

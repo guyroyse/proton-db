@@ -1,9 +1,6 @@
 proton.db = function(key) {
 
-	var fullKey = 'proton_db_' + key;
-	var metaKey = 'proton_db__meta';
-
-	var internal = {};
+	var fullKey = 'proton_db_' + key, metaKey = 'proton_db__meta', internal = {};
 
 	internal.save = function(theObjects) {
 		internal.saveMeta();
@@ -27,7 +24,7 @@ proton.db = function(key) {
 			window.localStorage.removeItem(fullKey);
 			internal.removeMeta();
 		} else {
-			var remainingObjects = new Array();
+			var remainingObjects = [];
 			internal.all().forEach(function(existingObject) {
 				if (!proton.match(existingObject, theQueries))
 					remainingObjects.push(existingObject);
@@ -38,7 +35,7 @@ proton.db = function(key) {
 
 	internal.removeMeta = function() {
 		var existingObjects = internal.all(metaKey);
-		var allObjects = new Array();
+		var allObjects = [];
 		for ( var i = 0; i < existingObjects.length; i++) {
 			if (existingObjects[i] != key) {
 				allObjects.push(existingObjects[i]);
@@ -56,12 +53,13 @@ proton.db = function(key) {
 	};
 
 	internal.all = function(key) {
+		var existingObjects;
+		var allObjects = [];
 		if (key != null) {
-			var existingObjects = JSON.parse(window.localStorage[key]);
+			existingObjects = JSON.parse(window.localStorage[key]);
 		} else {
-			var existingObjects = JSON.parse(window.localStorage[fullKey]);
+			existingObjects = JSON.parse(window.localStorage[fullKey]);
 		}
-		var allObjects = new Array();
 		for ( var i = 0; i < existingObjects.length; i++) {
 			allObjects.push(existingObjects[i]);
 		}
@@ -74,7 +72,7 @@ proton.db = function(key) {
 
 	internal.update = function(theArguments) {
 		if (theArguments.length > 0) {
-			var theUpdate = theArguments[0];
+			var theUpdate = theArguments[0]
 			var theQueries = theArguments.slice(1);
 			internal.updateObjects(theUpdate, theQueries);
 		}
@@ -107,7 +105,7 @@ proton.db = function(key) {
 		}
 	};
 
-	var db = {
+	return {
 		save : function() {
 			internal.save(proton.argumentsToArray(arguments));
 		},
@@ -130,6 +128,5 @@ proton.db = function(key) {
 			internal.update(proton.argumentsToArray(arguments));
 		}
 	};
-	
-	return db;
-}
+
+};

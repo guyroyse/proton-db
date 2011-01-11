@@ -17,7 +17,9 @@ var JSON = {};
 // See http://www.ietf.org/rfc/rfc4627.txt
 JSON.parse = function(s) {
 	try {
-		return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(s.replace(/"(\\.|[^"\\])*"/g, ''))) && eval('(' + s + ')');
+		return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(s.replace(
+				/"(\\.|[^"\\])*"/g, '')))
+				&& eval('(' + s + ')');
 	} catch (e) {
 		return false;
 	}
@@ -53,7 +55,8 @@ JSON.parse = function(s) {
 						return c;
 					}
 					c = b.charCodeAt();
-					return '\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16);
+					return '\\u00' + Math.floor(c / 16).toString(16)
+							+ (c % 16).toString(16);
 				});
 			}
 			return '"' + x + '"';

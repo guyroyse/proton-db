@@ -69,4 +69,3 @@ proton.lte = proton.lessThanEqual;
 proton.eq = proton.equal;
 proton.not = proton.notEqual;
 proton.ne = proton.notEqual;
-

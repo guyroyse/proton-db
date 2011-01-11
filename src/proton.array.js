@@ -1,6 +1,7 @@
 Array.prototype.sift = function() {
 
-	var theQueries = null, foundObjects = [];
+	var theQueries;
+	var foundObjects = [];
 
 	if (arguments[0] instanceof Array) {
 		theQueries = arguments[0];
@@ -43,6 +44,8 @@ Array.prototype.page = function(page, pageCount) {
 
 Array.prototype.distinct = function() {
 
+	var uniques = [];
+	
 	var areObjectsIdentical = function(theObject, theOtherObject) {
 		return proton.match(theObject, theOtherObject)
 				&& proton.match(theOtherObject, theObject);
@@ -59,11 +62,11 @@ Array.prototype.distinct = function() {
 		return matchFound;
 	}
 
-	var uniques = new Array();
 	this.forEach(function(theObject) {
 		if (!searchForMatch(theObject))
 			uniques.push(theObject);
 	});
+	
 	return uniques;
 
 };
@@ -77,11 +80,10 @@ Array.prototype.order = function(sort) {
 		return keys;
 	}
 
-	var keys = extractKeysFromObject(sort);
-
 	var sortFunction = function(a, b) {
 		var compareComplete = false;
 		var compareResult = 0;
+		var keys = extractKeysFromObject(sort);
 		keys.forEach(function(key) {
 			if (!compareComplete) {
 				var result = sort[key](a[key], b[key]);
@@ -94,6 +96,5 @@ Array.prototype.order = function(sort) {
 		return compareResult;
 	}
 
-	sortedArray = this.sort(sortFunction);
-	return sortedArray;
+	return this.sort(sortFunction);
 };
