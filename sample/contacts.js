@@ -1,15 +1,18 @@
-var model = {
-	saveContact : function(contact) {
-		proton.db('contacts').save(contact);		
-	},
-	searchContactsByName : function(searchName) {
-		var query = { name : searchName };
-		return proton.db('contacts').find(query);
-	},
-	allContacts : function() {
-		return proton.db('contacts').all();		
-	}
-};
+var model = (function() {
+	var db = proton.db('contacts');
+	return {
+		saveContact : function(contact) {
+			db.save(contact);		
+		},
+		searchContactsByName : function(searchName) {
+			var query = { name : searchName };
+			return db.find(query);
+		},
+		allContacts : function() {
+			return db.all();		
+		}
+	};
+})();
 
 var view = {
 	clearResults : function() {
