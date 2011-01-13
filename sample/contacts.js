@@ -23,40 +23,48 @@ var view = {
 	}
 };
 
+var controller = (function() {
+
+	function displayContacts(contacts) {
+		view.clearResults();
+		var sort = { name : proton.ascending };
+		contacts.order(sort).forEach(function(contact) {
+			view.addResult([ contact.name, contact.email, contact.twitter, contact.beverage ]);
+		});
+	}
+
+	return {
+		onAddClick : function() {
+			var contact = {
+				name : view.getName(),
+				email : view.getEmail(),
+				twitter : view.getTwitter(),
+				beverage : view.getBeverage()
+			};
+			proton.db('contacts').save(contact);
+		},
+		onSearchClick : function() {
+			var query = { name : $('#searchName').val() };
+			displayContacts(proton.db('contacts').find(query));
+		},
+		onShowAllClick : function() {
+			displayContacts(proton.db('contacts').all());
+		}
+	};
+})();
+
 $(document).ready(function() {
 
 	$('#add').click(function() {
-		var contact = {
-			name : view.getName(),
-			email : view.getEmail(),
-			twitter : view.getTwitter(),
-			beverage : view.getBeverage()
-		};
-		proton.db('contacts').save(contact);
+		controller.onAddClick();
 	});
 
 	$('#search').click(function() {
-		var contacts = proton.db('contacts').find({
-			name : $('#searchName').val()
-		});
-		displayContacts(contacts);
+		controller.onSearchClick();
 	});
 
 	$('#showAll').click(function() {
-		var contacts = proton.db('contacts').all();
-		displayContacts(contacts);
+		controller.onShowAllClick();
 	});
 
 });
-
-function displayContacts(contacts) {
-	view.clearResults();
-	var table = $('#results').get(0);
-	contacts.order({
-		name : proton.ascending
-	}).forEach(
-			function(contact) {
-				view.addResult([ contact.name, contact.email, contact.twitter,
-						contact.beverage ]);
-			});
-}
