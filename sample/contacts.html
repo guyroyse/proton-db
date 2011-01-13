@@ -1,0 +1,38 @@
+<html>
+
+<head>
+
+<title>Contacts</title>
+
+<script language="javascript" type="text/javascript" src="../dist/proton.js"></script>
+<script language="javascript" type="text/javascript" src="jquery-1.4.4.js"></script>
+<script language="javascript" type="text/javascript" src="contacts.js"></script>
+
+<style>
+ .label {
+ 	width: 100px;
+ 	float: left;
+ }
+</style>
+
+</head>
+
+<body>
+
+<h1>Add Contact</h1>
+
+<div class="label">Name</div><input type="text" id="name" /><br/>
+<div class="label">Email</div><input type="text" id="email" /><br/>
+<div class="label">Twitter</div><input type="text" id="twitter" /><br/>
+<div class="label">Beverage</div><input type="text" id="beverage" /><br/>
+<div class="label">&nbsp;</div><input type="button" id="add" value="Add Contact"/>
+
+<h1>Search Contacts</h1>
+
+<p><input type="text" id="searchName" /><input type="button" id="search" value="Search by Name"/><input type="button" id="showAll" value="Show All"/></p>
+
+<table id="results">
+</table>
+
+</body>
+</html>

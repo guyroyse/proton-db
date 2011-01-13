@@ -28,4 +28,3 @@
 		<exec executable="${basedir}/minify/jsmin.exe" osfamily="windows" input="${basedir}/dist/proton.js" output="${basedir}/dist/proton-min.js" />
 	</target>
 </project>
-
