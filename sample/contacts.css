@@ -2,3 +2,10 @@
 	width: 100px;
 	float: left;
 }
+
+td.header {
+	font-weight: bold;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	width: 200px;
+}
