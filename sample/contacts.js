@@ -1,3 +1,16 @@
+var view = {
+	clearResults : function() {
+		$('#results').get(0).innerHTML = '';
+	},
+	addResult : function(values) {
+		var table = $('#results').get(0);
+		var row = table.insertRow(-1);
+		for (var i = 0; i < values.length; i++) {
+			row.insertCell(i).innerHTML = values[i];
+		};
+	}
+};
+
 $(document).ready(function() {
 	
 	$('#add').click(function() {
@@ -23,19 +36,9 @@ $(document).ready(function() {
 });
 
 function displayContacts(contacts) {
+	view.clearResults();
 	var table = $('#results').get(0);
-	table.innerHTML = '';
 	contacts.order({name: proton.ascending}).forEach(function(contact) {
-		var row = table.insertRow(-1);
-		
-		var nameCell = row.insertCell(0);
-		var emailCell = row.insertCell(1);
-		var twitterCell = row.insertCell(2);
-		var beverageCell = row.insertCell(3);
-		
-		nameCell.innerHTML = contact.name;
-		emailCell.innerHTML = contact.email;
-		twitterCell.innerHTML = contact.twitter;
-		beverageCell.innerHTML = contact.beverage;
+		view.addResult([contact.name, contact.email, contact.twitter, contact.beverage]);
 	});
 }
