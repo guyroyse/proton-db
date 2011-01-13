@@ -1,3 +1,16 @@
+var model = {
+	saveContact : function(contact) {
+		proton.db('contacts').save(contact);		
+	},
+	searchContactsByName : function(searchName) {
+		var query = { name : searchName };
+		return proton.db('contacts').find(query);
+	},
+	allContacts : function() {
+		return proton.db('contacts').all();		
+	}
+};
+
 var view = {
 	clearResults : function() {
 		$('#results').get(0).innerHTML = '';
@@ -20,19 +33,37 @@ var view = {
 	},
 	getBeverage : function() {
 		return $('#beverage').val();
+	},
+	getSerachName : function() {
+		return $('#searchName').val();
 	}
 };
 
 var controller = (function() {
 
 	function displayContacts(contacts) {
-		view.clearResults();
-		var sort = { name : proton.ascending };
-		contacts.order(sort).forEach(function(contact) {
-			view.addResult([ contact.name, contact.email, contact.twitter, contact.beverage ]);
-		});
+		clearResults();
+		contacts = sortContacts(contacts);
+		addContacts(contacts);
 	}
-
+	
+	function clearResults() {
+		view.clearResults();
+	}
+	
+	function sortContacts(contacts) {
+		var sort = { name : proton.ascending };
+		return contacts.order(sort);
+	}
+	
+	function addContacts(contacts) {
+		contacts.forEach(addContact);
+	}
+	
+	function addContact(contact) {
+		view.addResult([ contact.name, contact.email, contact.twitter, contact.beverage ]);
+	}
+	
 	return {
 		onAddClick : function() {
 			var contact = {
@@ -41,14 +72,16 @@ var controller = (function() {
 				twitter : view.getTwitter(),
 				beverage : view.getBeverage()
 			};
-			proton.db('contacts').save(contact);
+			model.saveContact(contact);
 		},
 		onSearchClick : function() {
-			var query = { name : $('#searchName').val() };
-			displayContacts(proton.db('contacts').find(query));
+			var searchName = view.getSerachName();
+			var contacts = model.searchContactsByName(searchName);
+			displayContacts(contacts);
 		},
 		onShowAllClick : function() {
-			displayContacts(proton.db('contacts').all());
+			var contacts = model.allContacts();
+			displayContacts(contacts);
 		}
 	};
 })();
